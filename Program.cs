@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using MyPortFolio.Data;
 using MyPortFolio.Extensions;
 using MyPortFolio.Interfaces;
+using MyPortFolio.Middleware;
 using MyPortFolio.Services;
 using System.Text;
 
@@ -17,6 +18,7 @@ builder.Services.AddIdentityServices(builder.Configuration);
 
 var app = builder.Build();
 
+app.UseMiddleware<ExceptionMiddleware>();  
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

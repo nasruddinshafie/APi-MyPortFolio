@@ -54,7 +54,7 @@ namespace MyPortFolio.Controllers
         {
             var user = await _context.AppUsers.SingleOrDefaultAsync(x => x.UserName == loginModel.username);
 
-            if (user == null) return Unauthorized();
+            if (user == null) return Unauthorized("Invalid Username");
 
             using var hmac = new HMACSHA512(user.PasswordSalt);
 

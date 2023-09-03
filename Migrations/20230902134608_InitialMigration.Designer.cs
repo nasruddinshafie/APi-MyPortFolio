@@ -11,7 +11,7 @@ using MyPortFolio.Data;
 namespace MyPortFolio.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230901131205_InitialMigration")]
+    [Migration("20230902134608_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -23,6 +23,28 @@ namespace MyPortFolio.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("MyPortFolio.Entities.AppUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<byte[]>("PasswordHash")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("PasswordSalt")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppUsers");
+                });
 
             modelBuilder.Entity("MyPortFolio.Entities.Project", b =>
                 {

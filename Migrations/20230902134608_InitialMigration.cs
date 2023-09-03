@@ -5,7 +5,7 @@
 namespace MyPortFolio.Migrations
 {
     /// <inheritdoc />
-    public partial class AddAppUserTable : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -24,6 +24,20 @@ namespace MyPortFolio.Migrations
                 {
                     table.PrimaryKey("PK_AppUsers", x => x.Id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Projects",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Projects", x => x.Id);
+                });
         }
 
         /// <inheritdoc />
@@ -31,6 +45,9 @@ namespace MyPortFolio.Migrations
         {
             migrationBuilder.DropTable(
                 name: "AppUsers");
+
+            migrationBuilder.DropTable(
+                name: "Projects");
         }
     }
 }
